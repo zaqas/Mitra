@@ -1,7 +1,7 @@
 # Mitra
 
 
-![Mitra Logo](/home/zahak/mitra_header_final.png)
+![Mitra Logo](images/mitra_header_final.png)
 
 Mitra is a minimalist and open-source web browser written in PyQt5 using Python programming language. It has various features including: tabs, bookmarks and dark mode.
 
