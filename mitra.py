@@ -1,4 +1,3 @@
-# Minimalistic browser written in Python using PyQt5
 import sys
 import qdarkstyle
 from PyQt5.QtCore import *
@@ -10,14 +9,14 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QLineEdit, QTabW
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        #self.setWindowIcon(QIcon("images/mitra_logo2.png"))
-        self.setWindowIcon(QIcon("mitrax64.png"))
+        self.setWindowIcon(QIcon(os.path.join('images', 'mitra_logo2.png')))
         self.setGeometry(550, 230, 1350, 900)
 
         # Create toolbar
-        toolBar = self.addToolBar("File")
-        self.addToolBar(toolBar)
-        toolBar.addSeparator()
+        toolbar = self.addToolBar("File")
+        self.addToolBar(toolbar)
+        toolbar.addSeparator()
+        toolbar.setMovable(False)
 
         # Create tab widget
         self.tab = QTabWidget()
@@ -29,19 +28,17 @@ class MainWindow(QMainWindow):
         self.tab.tabBarDoubleClicked.connect(self.double_click_tab)
         self.tab.currentChanged.connect(self.current_tab_changed)
 
-        # Back button
-        back_button = QAction(QIcon("images/sign-left-icon.png"), "Back", self)
-        toolBar.addAction(back_button)
+        # Add buttons to toolbar
+        back_button = QAction(QIcon(os.path.join('images', 'sign-left-icon.png')), "Back", self)
+        toolbar.addAction(back_button)
         back_button.triggered.connect(lambda: self.tab.currentWidget().back())
 
-        # Forward button
-        fwd_button = QAction(QIcon("images/sign-right-icon.png"), "Forward", self)
-        toolBar.addAction(fwd_button)
+        fwd_button = QAction(QIcon(os.path.join('images', 'sign-right-icon.png')), "Forward", self)
+        toolbar.addAction(fwd_button)
         fwd_button.triggered.connect(lambda: self.tab.currentWidget().forward())
 
-        # Homepage icon
-        home_button = QAction(QIcon("images/house-icon.png"), "Home", self)
-        toolBar.addAction(home_button)
+        home_button = QAction(QIcon(os.path.join('images', 'house-icon.png')), "Home", self)
+        toolbar.addAction(home_button)
         home_button.triggered.connect(self.go_home)
 
         # Create url field
@@ -53,24 +50,23 @@ class MainWindow(QMainWindow):
         self.url_field.returnPressed.connect(self.go_to_url)
         self.url_field.setClearButtonEnabled(True)
         # Add url field to our toolbar
-        toolBar.addWidget(self.url_field)
+        toolbar.addWidget(self.url_field)
 
-        # Reload icon
-        reload_button = QAction(QIcon("images/sign-sync-icon.png"), "Reload", self)
-        toolBar.addAction(reload_button)
+        reload_button = QAction(QIcon(os.path.join('images', 'sign-sync-icon.png')), "Reload", self)
+        toolbar.addAction(reload_button)
         reload_button.triggered.connect(lambda: self.tab.currentWidget().reload())
 
-        # Bookmark icon
-        bookmark_button = QAction(QIcon("images/star-icon.png"), "Bookmark", self)
-        toolBar.addAction(bookmark_button)
+        bookmark_button = QAction(QIcon(os.path.join('images', 'star-icon.png')), "Bookmark", self)
+        toolbar.addAction(bookmark_button)
         bookmark_button.triggered.connect(self.add_bookmark)
 
         # Dark Mode
-        light_bulb_button = QAction(QIcon("images/light-bulb-icon.png"), "Dark Mode", self)
-        toolBar.addAction(light_bulb_button)
+        
+        light_bulb_button = QAction(QIcon(os.path.join('images', 'light-bulb-icon.png')), "Dark Mode", self)
+        toolbar.addAction(light_bulb_button)
         light_bulb_button.triggered.connect(self.set_stylesheet)
 
-        # Shortcuts
+        # Define Shortcuts
         self.exit_shortcut = QShortcut(QKeySequence.Quit, self)
         self.exit_shortcut.activated.connect(lambda: app.quit())
 
