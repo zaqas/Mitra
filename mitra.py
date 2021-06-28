@@ -1,4 +1,5 @@
 import sys
+import os
 import qdarkstyle
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QIcon, QKeySequence
